@@ -6,10 +6,10 @@ from datetime import datetime
 
 class PredictionRequest(BaseModel):
     """予測リクエストのスキーマ"""
-    sepal_length: float = Field(..., description="がく片の長さ(cm)")
-    sepal_width: float = Field(..., description="がく片の幅(cm)")
-    petal_length: float = Field(..., description="花弁の長さ(cm)")
-    petal_width: float = Field(..., description="花弁の幅(cm)")
+    sepal_length: float = Field(..., description="sepal length(cm)")
+    sepal_width: float = Field(..., description="sepal width(cm)")
+    petal_length: float = Field(..., description="petal length(cm)")
+    petal_width: float = Field(..., description="petal width(cm)")
 
     class Config:
         schema_extra = {
