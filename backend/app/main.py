@@ -1,4 +1,6 @@
 from fastapi import FastAPI, Depends, HTTPException, Query
+from fastapi.responses import RedirectResponse
+from starlette import status
 from sqlalchemy.orm import Session
 import os
 import logging
@@ -18,6 +20,12 @@ app = FastAPI(
     description="機械学習モデルを使用した予測を提供するAPIサービス",
     version="1.0.0"
 )
+
+# ルートエンドポイント - APIドキュメントへリダイレクト
+@app.get("/", tags=["home"])
+async def root():
+    """APIのドキュメントページへリダイレクトします"""
+    return RedirectResponse(url="/docs", status_code=status.HTTP_302_FOUND)
 
 # アプリケーション起動時にデータベースの初期化
 @app.on_event("startup")
