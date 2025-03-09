@@ -68,7 +68,7 @@ uvicorn app.main:app --reload
 ```
 
 ### 5. Test the API
-Open your browser and navigate to [Swagger UI](http://localhost:8000/docs) to explore and test the API endpoints interactively.
+Open your browser and navigate to Swagger UI: http://localhost:8000/docs to explore and test the API endpoints interactively.
 
 ## Features
 - **Machine Learning Model**: Train and deploy a model for inference.
