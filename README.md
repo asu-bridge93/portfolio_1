@@ -1,29 +1,24 @@
 # Portfolio_1
 
 ## Overview
-This project is an app by Machine Learning model trained by iris_dataset and it's built with FastAPI. 
-It includes functionalities for 
-- training a machine learning model, 
-- managing a database, 
-- serving predictions via a RESTful API. 
-The project is structured to ensure scalability and maintainability.
+This is a FastAPI-based machine learning app that trains and serves a model using the iris dataset. It provides:
+- Model training and inference
+- A RESTful API for predictions
+- Database management with SQLAlchemy
 
 ## Project Structure
 ```
 backend/
 ├── app/
 │   ├── main.py           # FastAPI entry point
-│   ├── models/
-│   │   ├── ml_model.py   # Model wrapper for inference
-│   │   └── schemas.py    # Pydantic schemas for request/response validation
-│   └── database/
-│       ├── crud.py       # Database CRUD operations
-│       ├── database.py   # Database connection settings
-│       └── models.py     # SQLAlchemy ORM models
+│   ├── models/ml_model.py   # Model wrapper for inference
+│   ├── models/schemas.py    # Pydantic schemas
+│   ├── database/crud.py     # Database operations
+│   ├── database/database.py # Database connection
+│   └── database/models.py   # ORM models
 ├── model_training/
 │   ├── train.py          # Model training script
-│   └── data/
-│       └── dataset.csv   # Training dataset
+│   └── data/dataset.csv  # Training dataset
 ├── requirements.txt
 .gitignore
 README.md
@@ -37,50 +32,43 @@ cd backend
 ```
 
 ### 2. Install Dependencies
-
 #### Using `uv` (Recommended)
-[`uv`](https://github.com/astral-sh/uv) is a fast Python package manager that can replace `pip` and `venv`. If you don't have `uv` installed, take it in by the following command.
-For macOS/Linux
+[`uv`](https://github.com/astral-sh/uv) is a fast Python package manager. Install it with:
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh  # macOS/Linux
 iwr -useb https://astral.sh/uv/install.ps1 | iex # Windows
 ```
-
-After that, run the code bellow.
+Then, set up a virtual environment and install dependencies:
 ```bash
 uv venv
 source .venv/bin/activate  # macOS/Linux
 .venv\Scripts\activate     # Windows
-
 uv pip install -r requirements.txt
 ```
 
 ### 3. Train the Model
-Before running the API, train the machine learning model with the provided dataset.
 ```bash
 python model_training/train.py
 ```
 
 ### 4. Run the Backend Server
-Start the FastAPI server with Uvicorn.
 ```bash
 uvicorn app.main:app --reload
 ```
 
 ### 5. Test the API
-Open your browser and navigate to Swagger UI: http://localhost:8000/docs to explore and test the API endpoints interactively.
+Access Swagger UI at: [http://localhost:8000/docs](http://localhost:8000/docs)
 
 ## Features
-- **Machine Learning Model**: Train and deploy a model for inference.
-- **FastAPI Framework**: Provides high-performance, asynchronous API handling.
-- **Database Management**: Uses SQLAlchemy for data persistence.
-- **Interactive API Documentation**: Accessible via Swagger UI.
+- **FastAPI-based API** for high-performance ML model serving
+- **Model training & inference** using the iris dataset
+- **Database support** with SQLAlchemy
+- **Interactive API documentation** via Swagger UI
 
 ## License
-This project is licensed under the MIT License. Feel free to modify and distribute it.
+MIT License. Free to modify and distribute.
 
 ---
-
 ### 📌 Author
-[Asuka Miyazaki](https://github.com/asu-bridge93)
+[asu-bridge93](https://github.com/asu-bridge93)
 
