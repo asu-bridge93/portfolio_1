@@ -22,7 +22,7 @@ app = FastAPI(
 )
 
 # ルートエンドポイント - APIドキュメントへリダイレクト
-@app.get("/", tags=["home"])
+@app.get("/", tags=["Home"])
 async def root():
     """APIのドキュメントページへリダイレクトします"""
     return RedirectResponse(url="/docs", status_code=status.HTTP_302_FOUND)
@@ -46,7 +46,7 @@ async def startup():
             raise
 
 # ヘルスチェックエンドポイント
-@app.get("/health", response_model=schemas.HealthCheckResponse, tags=["システム"])
+@app.get("/health", response_model=schemas.HealthCheckResponse, tags=["HealthCheck"])
 async def health_check():
     """システムの状態を確認するエンドポイント"""
     return {
@@ -55,7 +55,7 @@ async def health_check():
     }
 
 # 予測エンドポイント
-@app.post("/predict", response_model=schemas.PredictionResponse, tags=["予測"])
+@app.post("/predict", response_model=schemas.PredictionResponse, tags=["Prediction"])
 async def create_prediction(
     request: schemas.PredictionRequest,
     db: Session = Depends(database.get_db)
@@ -79,7 +79,7 @@ async def create_prediction(
         raise HTTPException(status_code=500, detail=f"予測処理に失敗しました: {str(e)}")
 
 # 予測履歴取得エンドポイント
-@app.get("/history", response_model=schemas.PredictionList, tags=["履歴"])
+@app.get("/history", response_model=schemas.PredictionList, tags=["History"])
 async def read_predictions(
     skip: int = Query(0, ge=0, description="スキップするレコード数"),
     limit: int = Query(100, ge=1, le=1000, description="取得するレコードの最大数"),
@@ -95,7 +95,7 @@ async def read_predictions(
     }
 
 # 特定の予測履歴取得エンドポイント
-@app.get("/history/{prediction_id}", response_model=schemas.PredictionResponse, tags=["履歴"])
+@app.get("/history/{prediction_id}", response_model=schemas.PredictionResponse, tags=["History (id)"])
 async def read_prediction(
     prediction_id: int,
     db: Session = Depends(database.get_db)
