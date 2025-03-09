@@ -1,7 +1,12 @@
 # Portfolio: AI Model API
 
 ## Overview
-This project is an AI model API built with FastAPI. It includes functionalities for training a machine learning model, managing a database, and serving predictions via a RESTful API. The project is structured to ensure scalability and maintainability.
+This project is an app by Machine Learning model built with FastAPI. 
+It includes functionalities for 
+- training a machine learning model, 
+- managing a database, 
+- serving predictions via a RESTful API. 
+The project is structured to ensure scalability and maintainability.
 
 ## Project Structure
 ```
@@ -32,13 +37,22 @@ cd backend
 ```
 
 ### 2. Install Dependencies
+
+#### Using `uv` (Recommended)
+[`uv`](https://github.com/astral-sh/uv) is a fast Python package manager that can replace `pip` and `venv`. If you don't have `uv` installed, take it in by the following command.
+For macOS/Linux
 ```bash
-python -m venv venv
+curl -LsSf https://astral.sh/uv/install.sh | sh  # macOS/Linux
+iwr -useb https://astral.sh/uv/install.ps1 | iex # Windows
+```
 
-source venv/bin/activate  # macOS/Linux
-venv\Scripts\activate  # Windows
+After that, run the code bellow.
+```bash
+uv venv
+source .venv/bin/activate  # macOS/Linux
+.venv\Scripts\activate     # Windows
 
-pip install -r requirements.txt
+uv pip install -r requirements.txt
 ```
 
 ### 3. Train the Model
