@@ -8,20 +8,21 @@ This is a FastAPI-based machine learning app that trains and serves a model usin
 
 ## Project Structure
 ```
-backend/
-├── app/
-│   ├── main.py           # FastAPI entry point
-│   ├── models/ml_model.py   # Model wrapper for inference
-│   ├── models/schemas.py    # Pydantic schemas
-│   ├── database/crud.py     # Database operations
-│   ├── database/database.py # Database connection
-│   └── database/models.py   # ORM models
-├── model_training/
-│   ├── train.py          # Model training script
-│   └── data/dataset.csv  # Training dataset
-├── requirements.txt
-.gitignore
-README.md
+backend
+    ├── app
+    │   ├── database
+    │   │   ├── crud.py
+    │   │   ├── database.py
+    │   │   └── models.py
+    │   ├── main.py
+    │   └── models
+    │       ├── ml_model.py
+    │       ├── schemas.py
+    ├── model_training
+    │   ├── data
+    │   │   └── dataset.csv
+    │   └── train.py
+    └── requirements.txt
 ```
 
 ## Setup
