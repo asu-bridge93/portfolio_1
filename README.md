@@ -1,7 +1,7 @@
-# Portfolio: AI Model API
+# Portfolio_1
 
 ## Overview
-This project is an app by Machine Learning model built with FastAPI. 
+This project is an app by Machine Learning model trained by iris_dataset and it's built with FastAPI. 
 It includes functionalities for 
 - training a machine learning model, 
 - managing a database, 
