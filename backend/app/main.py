@@ -16,15 +16,18 @@ logger = logging.getLogger(__name__)
 
 # FastAPIアプリケーションの作成
 app = FastAPI(
-    title="AI予測API",
-    description="機械学習モデルを使用した予測を提供するAPIサービス",
+    title="Portfolio_1 -- asu-bridge93",
+    description="An API service that provides predictions using a machine learning model trained by iris_dataset",
     version="1.0.0"
 )
 
 # ルートエンドポイント - APIドキュメントへリダイレクト
 @app.get("/", tags=["Home"])
 async def root():
-    """APIのドキュメントページへリダイレクトします"""
+    """
+    Redirect to the /docs page.
+    This is intended to be connected to the frontend in the future.
+    """
     return RedirectResponse(url="/docs", status_code=status.HTTP_302_FOUND)
 
 # アプリケーション起動時にデータベースの初期化
@@ -48,7 +51,7 @@ async def startup():
 # ヘルスチェックエンドポイント
 @app.get("/health", response_model=schemas.HealthCheckResponse, tags=["HealthCheck"])
 async def health_check():
-    """システムの状態を確認するエンドポイント"""
+    """An endpoint to check the system's status"""
     return {
         "status": "healthy",
         "version": app.version
@@ -61,7 +64,7 @@ async def create_prediction(
     db: Session = Depends(database.get_db)
 ):
     """
-    AIモデルを使用して予測を行い、結果をデータベースに保存する
+    Perform predictions using an AI model and save the results in a database.
     """
     try:
         # リクエストデータをモデル用の辞書に変換
@@ -81,12 +84,12 @@ async def create_prediction(
 # 予測履歴取得エンドポイント
 @app.get("/history", response_model=schemas.PredictionList, tags=["History"])
 async def read_predictions(
-    skip: int = Query(0, ge=0, description="スキップするレコード数"),
-    limit: int = Query(100, ge=1, le=1000, description="取得するレコードの最大数"),
+    skip: int = Query(0, ge=0, description="How many records you skip"),
+    limit: int = Query(100, ge=1, le=1000, description="The maximum of the record you get"),
     db: Session = Depends(database.get_db)
 ):
     """
-    過去の予測履歴を取得する
+    Retrieve past prediction history.
     """
     predictions = crud.get_prediction_history(db, skip=skip, limit=limit)
     return {
@@ -101,7 +104,7 @@ async def read_prediction(
     db: Session = Depends(database.get_db)
 ):
     """
-    特定のIDの予測履歴を取得する
+    Retrieve the prediction history for a specific ID.
     """
     db_prediction = crud.get_prediction_by_id(db, prediction_id=prediction_id)
     if db_prediction is None:
