@@ -1,0 +1,148 @@
+/* カラーパレット */
+:root {
+    --primary-color: #4CAF50;
+    --secondary-color: #FFFFFF;
+    --background-color: #f4f7f6;
+    --input-bg-color: #e8f5e9;
+    --button-hover-color: #45a049;
+    --text-color: #333;
+    --border-radius: 8px;
+  }
+  
+  /* コンテナ */
+  .predictor-container {
+    width: 100%;
+    max-width: 600px;
+    padding: 30px;
+    background-color: var(--secondary-color);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute; /* 絶対位置から固定位置に変更 */
+    top: 50%; /* 上から50%の位置に配置 */
+    left: 50%;
+    transform: translate(-50%, -50%); /* 中央に配置（横と縦の両方） */
+    z-index: 10; /* 前面に表示 */
+    max-height: 100vh; /* 画面の90%の高さを最大値に */
+  }
+  
+  /* ヘッダー */
+  .header {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+  }
+  
+  /* 画像を一つだけ表示 - 修正 */
+  .image-gallery {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+    width: 100%;
+  }
+  
+  .image-gallery img {
+    width: 400px; /* サイズを大きくして目立たせる */
+    height: 180px;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /* 画像に軽いシャドウを追加 */
+    border: 2px solid var(--primary-color); /* 枠線を追加してアクセントに */
+  }
+  
+  /* フォーム */
+  .predictor-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    align-items: center; /* フォーム内のアイテムを中央揃え */
+  }
+  
+  /* フォームグループのバランス改善 */
+  .form-group {
+    display: grid;
+    grid-template-columns: 180px 280px 100px; /* グリッドでより精密な配置 */
+    align-items: center;
+    width: 100%;
+    margin-bottom: 5px;
+  }
+  
+  .feature-label {
+    text-align: right;
+    padding-right: 15px;
+    font-size: 1.1rem;
+    color: var(--text-color);
+    grid-column: 1;
+  }
+  
+  .slider {
+    width: 100%;
+    height: 20px;
+    border-radius: 10px;
+    background: #ddd;
+    -webkit-appearance: none;
+    appearance: none;
+    grid-column: 2;
+  }
+  
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .slider-value {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    text-align: center;
+    grid-column: 3;
+    width: 60px;
+    margin-left: 10px;
+    background-color: var(--input-bg-color);
+    padding: 5px;
+    border-radius: 4px;
+  }
+  
+  /* ボタン */
+  .submit-btn {
+    padding: 12px;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    font-size: 1.2rem;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 5px;
+    width: 200px;
+  }
+  
+  .submit-btn:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+  }
+  
+  .submit-btn:hover:not(:disabled) {
+    background-color: var(--button-hover-color);
+  }
+  
+  /* 結果 */
+  .prediction-result {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    text-align: center;
+    color: var(--primary-color);
+    font-weight: bold;
+    padding: 10px 30px;
+    background-color: var(--input-bg-color);
+    border-radius: var(--border-radius);
+  }
