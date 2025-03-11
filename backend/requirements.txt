@@ -2,7 +2,6 @@ fastapi==0.95.1
 uvicorn==0.34.0
 sqlalchemy==2.0.12
 python-dotenv==1.0.0
-scikit-learn==1.6.1
 pandas==2.2.3
 httpx==0.24.0
 google-cloud-storage==2.9.0
@@ -10,3 +9,4 @@ setuptools==75.9.1
 joblib==1.2.0
 numpy==2.2.0
 pydantic==1.10.7
+lightgbm==3.3.1
