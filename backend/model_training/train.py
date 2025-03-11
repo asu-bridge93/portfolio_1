@@ -8,10 +8,8 @@ import joblib
 import os
 import warnings
 
-# 警告を非表示にする
 warnings.filterwarnings("ignore")
 
-# パスの設定
 DATA_PATH = "model_training/data/Loan_default.csv"
 MODEL_PATH = "app/model/loan_default_model.joblib"
 
