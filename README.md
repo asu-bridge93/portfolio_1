@@ -1,75 +1,138 @@
-# Portfolio_1
+# Loan Default Prediction API
 
-## Overview
-This is a FastAPI-based machine learning app that trains and serves a model using the iris dataset. It provides:
-- Model training and inference
-- A RESTful API for predictions
-- Database management with SQLAlchemy
+A production-ready machine learning microservice that predicts loan default risk, built with FastAPI, containerization, CI/CD, and cloud deployment.
+
+![Loan Default Prediction](https://github.com/yourusername/loan-default-prediction/workflows/CI-CD/badge.svg)
+
+## [Live Demo](https://curriculum-07-asuka-miyazaki-final-assignment-52853345258.us-central1.run.app)
+
+## Project Overview
+
+This project showcases a comprehensive MLOps implementation for loan default risk assessment:
+
+- **End-to-end ML pipeline** from model training through production deployment
+- **Real-time prediction API** with robust error handling and input validation
+- **Complete DevOps integration** with containerization and automated deployment
+- **Industry best practices** in ML engineering and software development
+
+The service analyzes loan application data to predict default probability, helping financial institutions better manage risk while demonstrating advanced software engineering principles.
+
+## Key Features
+
+- **ML-powered risk assessment** using scikit-learn models trained on loan data
+- **High-performance API** built with FastAPI for low-latency predictions
+- **Persistent storage** with SQLAlchemy ORM for prediction history and model tracking
+- **Cloud-native architecture** with Docker containerization
+- **Automated CI/CD pipeline** using GitHub Actions for seamless deployment
+- **Interactive API documentation** with Swagger UI
+
+## Technical Stack
+
+| Component | Technology |
+|-----------|------------|
+| ML Framework | scikit-learn |
+| API | FastAPI |
+| Database | SQLAlchemy ORM |
+| Containerization | Docker |
+| CI/CD | GitHub Actions |
+| Cloud Platform | Google Cloud Run |
+| Package Management | uv (high-performance Python package installer) |
 
 ## Project Structure
+
 ```
-backend
-    ├── app
-    │   ├── database
-    │   │   ├── crud.py
-    │   │   ├── database.py
-    │   │   └── models.py
-    │   ├── main.py
-    │   └── models
-    │       ├── ml_model.py
-    │       ├── schemas.py
-    ├── model_training
-    │   ├── data
-    │   │   └── dataset.csv
-    │   └── train.py
-    └── requirements.txt
+backend/
+├── Dockerfile                # Docker container configuration
+├── app                       # Main application directory
+│   ├── api
+│   │   └── api_schemas.py    # Pydantic schemas for API validation
+│   ├── database              # Database components
+│   │   ├── crud.py           # Database operations
+│   │   ├── database.py       # DB connection setup
+│   │   └── table.py          # SQLAlchemy models
+│   ├── main.py               # FastAPI entry point
+│   └── model
+│       └── wrapper.py        # ML model interface
+├── model_training            # Model development
+│   ├── data
+│   │   └── Loan_default.csv  # Training dataset
+│   ├── experiment-notebook.ipynb  # Experimentation notebook
+│   └── train.py              # Model training script
+└── requirements.txt          # Project dependencies
 ```
 
-## Setup
-### 1. Clone the Repository
-```bash
-git clone https://github.com/asu-bridge93/portfolio_1.git
-cd backend
-```
+## Data Source
 
-### 2. Install Dependencies
-#### Using `uv` (Recommended)
-[`uv`](https://github.com/astral-sh/uv) is a fast Python package manager. Install it with:
+This project uses the [Loan Default Dataset from Kaggle](https://www.kaggle.com/datasets/nikhil1e9/loan-default) for model training and validation.
+
+## Getting Started
+
+### Quick Setup with uv
+
+[uv](https://github.com/astral-sh/uv) provides significantly faster dependency resolution and installation:
+
 ```bash
+# Install uv
 curl -LsSf https://astral.sh/uv/install.sh | sh  # macOS/Linux
 iwr -useb https://astral.sh/uv/install.ps1 | iex # Windows
-```
-Then, set up a virtual environment and install dependencies:
-```bash
+
+# Create and activate virtual environment
 uv venv
 source .venv/bin/activate  # macOS/Linux
 .venv\Scripts\activate     # Windows
+
+# Install dependencies
 uv pip install -r requirements.txt
 ```
 
-### 3. Train the Model
-```bash
-python model_training/train.py
-```
+### Local Development
 
-### 4. Run the Backend Server
 ```bash
+# Train the model
+python model_training/train.py
+
+# Start the application
 uvicorn app.main:app --reload
 ```
 
-### 5. Test the API
-Access Swagger UI at: [http://localhost:8000/docs](http://localhost:8000/docs)
+Access the API documentation at http://localhost:8000/docs
 
-## Features
-- **FastAPI-based API** for high-performance ML model serving
-- **Model training & inference** using the iris dataset
-- **Database support** with SQLAlchemy
-- **Interactive API documentation** via Swagger UI
+### Docker Deployment
+
+```bash
+# Build the image
+docker build -t backend .
+
+# Run the container
+docker run -p 8000:8000 backend
+```
+
+## CI/CD Pipeline
+
+The project implements a streamlined CI/CD workflow with GitHub Actions:
+
+1. Code push to GitHub repository
+2. Automated Docker image building
+3. Deployment to Google Cloud Run
+
+## API Endpoints
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/predict` | POST | Submit loan data and receive default prediction |
+| `/history` | GET | Retrieve recent prediction records from database |
+| `/history_id` | GET | Get specific prediction record by ID |
+| `/health` | GET | System health check for monitoring |
+
+## Future Development
+
+- Enhanced feature engineering to improve model performance
+- Frontend visualization dashboard for prediction insights
 
 ## License
-MIT License. Free to modify and distribute.
+
+MIT
 
 ---
-### 📌 Author
-[asu-bridge93](https://github.com/asu-bridge93)
 
+© 2025 | [GitHub Profile](https://github.com/asu-bridge93)
