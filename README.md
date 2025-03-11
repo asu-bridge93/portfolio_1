@@ -2,9 +2,7 @@
 
 A production-ready machine learning microservice that predicts loan default risk, built with FastAPI, containerization, CI/CD, and cloud deployment.
 
-![Loan Default Prediction](https://github.com/yourusername/loan-default-prediction/workflows/CI-CD/badge.svg)
-
-## [Live Demo](https://curriculum-07-asuka-miyazaki-final-assignment-52853345258.us-central1.run.app)
+## [Live Demo(not available now)]()
 
 ## Project Overview
 
