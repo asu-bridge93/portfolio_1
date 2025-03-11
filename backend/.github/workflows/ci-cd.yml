@@ -1,0 +1,73 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  SERVICE_NAME: backend
+  REGION: asia-northeast1
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        
+    - name: Run tests
+      run: |
+        pytest --cov=app tests/
+        
+  build-and-deploy:
+    name: Build and Deploy
+    needs: test
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Google Auth
+      id: auth
+      uses: google-github-actions/auth@v1
+      with:
+        credentials_json: ${{ secrets.GCP_SA_KEY }}
+        
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@v1
+      
+    - name: Configure Docker
+      run: gcloud auth configure-docker
+      
+    - name: Build and Push Docker image
+      run: |
+        docker build -t gcr.io/$PROJECT_ID/$SERVICE_NAME:${{ github.sha }} .
+        docker push gcr.io/$PROJECT_ID/$SERVICE_NAME:${{ github.sha }}
+        
+    - name: Deploy to Cloud Run
+      run: |
+        gcloud run deploy $SERVICE_NAME \
+          --image gcr.io/$PROJECT_ID/$SERVICE_NAME:${{ github.sha }} \
+          --platform managed \
+          --region $REGION \
+          --allow-unauthenticated \
+          --cpu=1 \
+          --memory=1Gi \
+          --set-env-vars="DATABASE_URL=${{ secrets.DATABASE_URL }}"
