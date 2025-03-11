@@ -11,18 +11,15 @@ from app.model.wrapper import ModelWrapper
 from app.api import api_schemas
 from app.database import crud, database
 
-# Logging configuration
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Create FastAPI application
 app = FastAPI(
     title="Loan Default Prediction -- asu-bridge93",
     description="Predicts loan default risk using a machine learning model based on user financial data.",
     version="1.0.0"
 )
 
-# Initialize the database when the application starts
 @app.on_event("startup")
 async def startup():
     # Create database tables
@@ -39,7 +36,6 @@ async def startup():
         if os.getenv("ENVIRONMENT") == "production":
             raise
 
-# Prediction endpoint
 @app.post("/predict", response_model=api_schemas.PredictionResponse, tags=["Prediction"])
 async def create_prediction(
     request: api_schemas.PredictionRequest,
@@ -76,7 +72,6 @@ async def create_prediction(
         logger.error(f"Error during prediction processing: {e}")
         raise HTTPException(status_code=500, detail=f"Prediction processing failed: {str(e)}")
 
-# Retrieve prediction history
 @app.get("/history", response_model=api_schemas.PredictionList, tags=["History"])
 async def read_predictions(
     skip: int = Query(0, ge=0, description="Number of records to skip"),
@@ -97,7 +92,6 @@ async def read_predictions(
     predictions = crud.get_prediction_history(db, skip=skip, limit=limit)
     return {"total": len(predictions), "predictions": predictions}
 
-# Retrieve a specific prediction by ID
 @app.get("/history/{prediction_id}", response_model=api_schemas.PredictionResponse, tags=["History_id"])
 async def read_prediction(
     prediction_id: int,
@@ -111,7 +105,6 @@ async def read_prediction(
         raise HTTPException(status_code=404, detail=f"Prediction ID {prediction_id} not found")
     return db_prediction
 
-# Root endpoint - Redirect to API documentation
 @app.get("/", tags=["Root"])
 async def root():
     """
@@ -119,7 +112,6 @@ async def root():
     """
     return RedirectResponse(url="/docs", status_code=status.HTTP_302_FOUND)
 
-# ヘルスチェックエンドポイント
 @app.get("/health", response_model=api_schemas.HealthCheckResponse, tags=["HealthCheck"])
 async def health_check():
     """An endpoint to check the system's status"""
