@@ -2,7 +2,7 @@
 
 A production-ready machine learning microservice that predicts loan default risk, built with FastAPI, containerization, CI/CD, and cloud deployment.
 
-## [Live Demo(not available now)]()
+## [Live Demo](https://portfolio-1-52853345258.us-central1.run.app)
 
 ## Project Overview
 
